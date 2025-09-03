@@ -1,12 +1,13 @@
-name: release
+name: ci
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - "**"
+  pull_request:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build-windows:
@@ -32,26 +33,16 @@ jobs:
         run: |
           pyinstaller --noconfirm --clean --onefile --windowed --name VoiceDict --additional-hooks-dir hooks voice_dict.py
 
-      - name: Prepare zip artifact
+      - name: Package artifact (zip)
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path releases | Out-Null
-          $tag = "${{ github.ref_name }}"
-          $zip = "VoiceDict-Windows-x64-" + $tag + ".zip"
-          Compress-Archive -Path dist/VoiceDict.exe -DestinationPath ("releases/" + $zip) -Force
-          echo "RELEASE_ZIP=$zip" | Out-File -FilePath $env:GITHUB_ENV -Append
+          $name = "VoiceDict-Windows-x64-${{ github.sha }}.zip"
+          Compress-Archive -Path dist/VoiceDict.exe -DestinationPath ("releases/" + $name) -Force
+          echo "ARTIFACT_NAME=$name" | Out-File -FilePath $env:GITHUB_ENV -Append
 
-      - name: Upload CI artifact (zip)
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: VoiceDict-Windows-x64
-          path: releases/${{ env.RELEASE_ZIP }}
-
-      - name: Create GitHub Release and upload asset
-        uses: softprops/action-gh-release@v2
-        with:
-          files: releases/${{ env.RELEASE_ZIP }}
-          name: ${{ github.ref_name }}
-          tag_name: ${{ github.ref_name }}
-          draft: false
-          prerelease: false
+          path: releases/${{ env.ARTIFACT_NAME }}
