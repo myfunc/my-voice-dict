@@ -1,14 +1,15 @@
-## VoiceDict (Windows 11)
+## VoiceDict
 
 Simple app for voice typing using the OpenAI API.
 Type in your favorite IDE (e.g., Cursor).
+
+![UI](./docs/ui.png)
 
 ### Overview
 - Voice typing into any Windows app window.
 - Automatically detects input language.
 - Global hotkey: Win+Shift+I — start/stop (can be changed in the UI).
 - Transcribes EN/RU, pastes into the active input field.
-- Interface screenshot: ![UI](./docs/ui.png)
 
 ### Quick start
 - Set your `OPENAI_API_KEY` in a `.env` file (rename `.env.example` to `.env`).
@@ -24,7 +25,7 @@ Hands‑free speech → text into any focused app (e.g., Cursor chat).
 - Emits short sound effects on start/stop.
 
 ### Requirements
-- Windows 11
+- Windows 10+
 - Python 3.10+
 - An OpenAI API key
 - Recommended: run the Python process as Administrator (for reliable global hotkeys)
