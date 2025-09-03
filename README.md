@@ -1,8 +1,8 @@
 ## VoiceDict
 
-### All the code was written only by `gpt-5 - Cursor` in 1 chat for 20 minutes.
+### This simple utility was generated in 1 chat with small modifications (gpt-5 Cursor) 
 
-Simple app for voice typing using the OpenAI API.
+Simple app for typing text using your voice and the OpenAI API.
 Type in your favorite IDE (e.g., Cursor).
 
 ![UI](./docs/ui.png)
@@ -14,11 +14,16 @@ Type in your favorite IDE (e.g., Cursor).
 OPENAI_API_KEY=sk-...
 ```
 
+Chats with Cursor:
+- [1_cursor_speech_recognition_program_for_w.md](./prompts/1_cursor_speech_recognition_program_for_w.md) - Generated stable version
+- [2_cursor_exe.md](./prompts/2_cursor_exe.md) - Wrapped to `exe` file for Windows
+- [3_cursor_.md](./prompts/3_cursor_.md) - Setup a release flow in GitHub
+
 ### Overview
 - Voice typing into any Windows app window.
 - Automatically detects input language.
 - Global hotkey: Win+Shift+I — start/stop (can be changed in the UI).
-- Transcribes EN/RU, pastes into the active input field.
+- Transcribes multiple languages simultaneously, outputs in the focused input field.
 
 ### Quick start (from source)
 - Set your `OPENAI_API_KEY` in a `.env` file (rename `.env.example` to `.env`).
