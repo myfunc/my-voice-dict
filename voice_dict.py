@@ -481,6 +481,9 @@ class VoiceDictApp:
 				text = transcribe_wav_bytes(wav_bytes)
 				if text:
 					self._handle_transcription(text)
+			except Exception as e:
+				self.set_status(f"Transcribe error: {e}")
+
 	def _handle_transcription(self, original_text: str):
 		processed_text = original_text
 		translated_text = ""
@@ -500,8 +503,6 @@ class VoiceDictApp:
 			self.log_tree.insert('', 'end', values=(self.log_counter, ts, original_text, translated_text))
 		except Exception:
 			pass
-			except Exception as e:
-				self.set_status(f"Transcribe error: {e}")
 
 	def _on_unmap(self, _event):
 		# If minimized, hide to tray
