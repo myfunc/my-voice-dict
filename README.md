@@ -1,5 +1,7 @@
 ## VoiceDict
 
+### All the code was written only by `gpt-5 - Cursor` in 1 chat for 20 minutes.
+
 Simple app for voice typing using the OpenAI API.
 Type in your favorite IDE (e.g., Cursor).
 
