@@ -5,13 +5,20 @@ Type in your favorite IDE (e.g., Cursor).
 
 ![UI](./docs/ui.png)
 
+### Download
+- Windows x64: get the latest build from the Releases page: [Latest Release](../../releases/latest) · [All Releases](../../releases)
+- Unzip and run `VoiceDict.exe`. On first launch, `.env` and `config.json` will be created next to the executable. Put your API key into `.env`:
+```
+OPENAI_API_KEY=sk-...
+```
+
 ### Overview
 - Voice typing into any Windows app window.
 - Automatically detects input language.
 - Global hotkey: Win+Shift+I — start/stop (can be changed in the UI).
 - Transcribes EN/RU, pastes into the active input field.
 
-### Quick start
+### Quick start (from source)
 - Set your `OPENAI_API_KEY` in a `.env` file (rename `.env.example` to `.env`).
 - Run `run.bat` (creates venv and installs dependencies).
 

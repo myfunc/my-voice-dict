@@ -1,4 +1,5 @@
 import os
+import sys
 import threading
 import queue
 import time
@@ -26,13 +27,6 @@ except Exception:
 
 # Load OpenAI client
 from dotenv import load_dotenv
-load_dotenv()
-
-try:
-	from openai import OpenAI
-	_openai_client = OpenAI()
-except Exception as _e:
-	_openai_client = None
 
 APP_TITLE = "VoiceDict"
 DEFAULT_HOTKEY = "windows+shift+i"  # Default global hotkey
@@ -42,7 +36,35 @@ CHANNELS = 1
 VAD_AGGRESSIVENESS = 2  # 0-3, higher is more aggressive
 MAX_SEGMENT_SECONDS = 15.0
 TRAILING_SILENCE_MS = 600  # how much silence to consider end of utterance
-CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.json")
+# Determine base directory for resources/config
+# - In a PyInstaller one-file build, use the directory of the executable
+# - In dev (non-frozen), use the directory of this source file
+if getattr(sys, 'frozen', False):
+	BASE_DIR = os.path.dirname(sys.executable)
+else:
+	BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Ensure .env and config.json exist next to the executable
+ENV_PATH = os.path.join(BASE_DIR, ".env")
+# Create .env if missing with empty key
+try:
+	if not os.path.exists(ENV_PATH):
+		with open(ENV_PATH, 'w', encoding='utf-8') as _f:
+			_f.write("OPENAI_API_KEY=\n")
+except Exception:
+	pass
+
+# Load .env from the base directory (supports both dev and packaged exe)
+load_dotenv(ENV_PATH)
+
+# Config stored next to the executable (or next to this file in dev)
+CONFIG_PATH = os.path.join(BASE_DIR, "config.json")
+try:
+	if not os.path.exists(CONFIG_PATH):
+		with open(CONFIG_PATH, 'w', encoding='utf-8') as _f:
+			_f.write('{"hotkey": "' + DEFAULT_HOTKEY + '"}')
+except Exception:
+	pass
 
 class AudioSegmenter:
 	def __init__(self, sample_rate: int, frame_duration_ms: int, vad_level: int):
@@ -167,6 +189,13 @@ def save_config_hotkey(hotkey: str):
 
 class VoiceDictApp:
 	def __init__(self):
+		# Initialize OpenAI client after .env loaded
+		global _openai_client
+		try:
+			from openai import OpenAI
+			_openai_client = OpenAI()
+		except Exception as _e:
+			_openai_client = None
 		self.listening = False
 		self.stop_event = threading.Event()
 		self.segments_queue: queue.Queue[bytes] = queue.Queue(maxsize=32)

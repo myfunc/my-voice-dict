@@ -87,4 +87,6 @@ temp_audio/
 *.mp3
 *.flac
 
-
+dist/
+build/
+*.spec

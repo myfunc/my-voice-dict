@@ -1,0 +1,54 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install -r requirements.txt
+          python -m pip install pyinstaller webrtcvad-wheels
+
+      - name: Build one-file Windows exe
+        run: |
+          pyinstaller --noconfirm --clean --onefile --windowed --name VoiceDict --additional-hooks-dir hooks voice_dict.py
+
+      - name: Prepare zip artifact
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path releases | Out-Null
+          Compress-Archive -Path dist/VoiceDict.exe -DestinationPath releases/VoiceDict-Windows-x64.zip -Force
+
+      - name: Upload CI artifact (zip)
+        uses: actions/upload-artifact@v4
+        with:
+          name: VoiceDict-Windows-x64
+          path: releases/VoiceDict-Windows-x64.zip
+
+      - name: Create GitHub Release and upload asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: releases/VoiceDict-Windows-x64.zip
+          name: ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
