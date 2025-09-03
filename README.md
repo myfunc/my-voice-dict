@@ -15,7 +15,7 @@ OPENAI_API_KEY=sk-...
 ```
 
 Chats with Cursor:
-- [1_cursor_speech_recognition_program_for_w.md](./prompts/1_cursor_speech_recognition_program_for_w.md) - Generated stable version
+- [1_cursor_speech_recognition_program_for_w.md](./prompts/1_cursor_speech_recognition_program_for_w.md#completly-working-application-as-in-the-prompt) - Generated stable version
 - [2_cursor_exe.md](./prompts/2_cursor_exe.md) - Wrapped to `exe` file for Windows
 - [3_cursor_.md](./prompts/3_cursor_.md) - Setup a release flow in GitHub
 
