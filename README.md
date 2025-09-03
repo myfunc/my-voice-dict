@@ -2,8 +2,8 @@
 
 ### This simple utility was generated in 1 chat with small modifications (gpt-5 Cursor) 
 
-Simple app for typing text using your voice and the OpenAI API.
-Type in your favorite IDE (e.g., Cursor).
+Simple app for typing text using your voice and the OpenAI API written in Python.
+With this tool you can speak to generate an abount perfect transcriprion using `speach-to-text` model in realtime. And automatically past it to any focused input box (ex.: VS Code, Cursor, JetBrains IDEs, Web Browsers).
 
 ![UI](./docs/ui.png)
 
@@ -15,9 +15,10 @@ OPENAI_API_KEY=sk-...
 ```
 
 Chats with Cursor:
-- [1_cursor_speech_recognition_program_for_w.md](./prompts/1_cursor_speech_recognition_program_for_w.md#completly-working-application-as-in-the-prompt) - Generated stable version
-- [2_cursor_exe.md](./prompts/2_cursor_exe.md) - Wrapped to `exe` file for Windows
-- [3_cursor_.md](./prompts/3_cursor_.md) - Setup a release flow in GitHub
+- [Chat 1](./prompts/1_cursor_speech_recognition_program_for_w.md#completly-working-application-as-in-the-prompt) - Idea prompt
+- [Chat 1 - scrolled by 33%](./prompts/1_cursor_speech_recognition_program_for_w.md#completly-working-application-as-in-the-prompt) - Perfectly working a stable version exactly as prompted
+- [Chat 2](./prompts/2_cursor_exe.md) -  Wrapping it into `exe` file for Windows
+- [Chat 3](./prompts/3_cursor_.md) - Setup a release flow in GitHub
 
 ### Overview
 - Voice typing into any Windows app window.
