@@ -23,6 +23,7 @@ Chats with Cursor:
 ### Overview
 - Voice typing into any Windows app window.
 - Automatically detects input language.
+- Short sound effects on start/stop
 - Global hotkey: Win+Shift+I — start/stop (can be changed in the UI).
 - Transcribes multiple languages simultaneously, outputs in the focused input field.
 
@@ -30,19 +31,10 @@ Chats with Cursor:
 - Set your `OPENAI_API_KEY` in a `.env` file (rename `.env.example` to `.env`).
 - Run `run.bat` (creates venv and installs dependencies).
 
-Hands‑free speech → text into any focused app (e.g., Cursor chat).
-
-- Global hotkey: Win+Shift+I (toggle start/stop)
-- Short sound effects on start/stop
-- Transcribes English, Russian, and code reliably (OpenAI API)
-- Types into the focused input of any opened app.
-- Compact always‑on‑top UI shows status and last transcript.
-- Emits short sound effects on start/stop.
-
 ### Requirements
 - Windows 10+
 - Python 3.10+
-- An OpenAI API key
+- An OpenAI API key. Can be obtained on [https://platform.openai.com/](https://platform.openai.com/)
 - Recommended: run the Python process as Administrator (for reliable global hotkeys)
 
 ### Install
