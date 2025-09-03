@@ -929,6 +929,20 @@ run_voice_dict.bat
 ```
 
 ---
+---
+---
+
+# Completly working application as in the prompt.
+<p align="center">
+  <img src="../docs/ui.png" alt="VoiceDict UI">
+</p>
+
+
+## All prompts below are adjustment and little improvements that don't include adding new features.
+
+---
+---
+---
 
 **User**
 
