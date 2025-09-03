@@ -932,7 +932,7 @@ run_voice_dict.bat
 ---
 ---
 
-# Completly working application as in the prompt.
+## Completly working application as in the prompt.
 <p align="center">
   <img src="../docs/ui.png" alt="VoiceDict UI">
 </p>
